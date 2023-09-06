@@ -6,45 +6,45 @@
 #    By: cter-maa <cter-maa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/08/29 15:44:21 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/09/06 13:09:48 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLES
-NAME 	= philo
-CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror
+NAME		= philo
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 ifdef DEBUG
-	CFLAGS += -g
+	CFLAGS	+= -g
 endif
 
 ifdef FSAN
-	CFLAGS +=-fsanitize=address,undefined
+	CFLAGS	+=-fsanitize=address,undefined
 endif
 
-RM 		= rm -rf
-SANITIZE = -fsanitize=address
+RM			= rm -rf
+SANITIZE	= -fsanitize=address
+
+INCLUDE = -I ./include 
 
 # SOURCES
-SRC = 	SRC/main.c \
+SRC			= src/philo/handle_error.c \
+			src/philo/handle_input.c \
+			src/philo/main.c \
+			src/utils/utils.c \
 
 # OBJECTS
 OBJ			= $(SRC:.c=.o)
 
 # COLORS
 DEF_COLOR 	= \033[0;39m
-GRAY 		= \033[0;90m
 RED 		= \033[0;91m
 GREEN 		= \033[0;92m
 YELLOW 		= \033[0;93m
-BLUE 		= \033[0;94m
-MAGENTA		= \033[0;95m
-CYAN 		= \033[0;96m
-WHITE 		= \033[0;97m
 
 # RULES
 $(NAME): $(OBJ)
-	$(CC) -pthread $(CFLAGS) $(OBJ) $(PRINTF) -o $(NAME)
+	$(CC) $(INCLUDE) -pthread $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)philo compiled $(DEF_COLOR)"
 	@echo "\n"
 	@echo " ___                             								 "
@@ -56,15 +56,6 @@ $(NAME): $(OBJ)
                                                                                          
 # RECIPES
 all: $(NAME)
-
-make comp: all clean
-	@echo "\n"
-	@echo " ___                             								 "
-	@echo "|         |                                        /            "
-	@echo "|___  ___ |___       _ _  ___  ___  ___       ___    ___  ___   "
-	@echo "|    |   )|         | | )|   )|   )|___)     |   )| |    |___) "
-	@echo "|___ |__/||___      |  / |__/ |    |__       |    | |___ |__   "
-	@echo "\n"
 
 debug:
 	$(MAKE) DEBUG=1

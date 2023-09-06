@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   handle_input.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/05/23 15:07:55 by cter-maa      ########   odam.nl         */
+/*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
+/*   Updated: 2023/09/06 14:37:59 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../../include/philo.h"
 
-// input handling
-// error handling
-// 
+// int32_t	ph_init(int argc, char **argv)
+// {
 
-int	main(void)
-{
-	
-	return(0);
-}
+// }
