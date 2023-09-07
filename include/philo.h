@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/06 14:19:30 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/07 10:20:09 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ typedef enum e_error
 }	t_error;
 
 // structures
-// typedef struct s_philo
-// {
+typedef struct s_philo
+{
 	
-// }	t_philo;
+}	t_philo;
 
+
+// input_parsing
 int32_t	ph_init(int argc, char **argv);
 
-// error
+
+// input_handling
 int		handle_error(int argc, char **argv);
 void	ph_putstr_fd(const int fd, const char *message);
 
