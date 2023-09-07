@@ -6,13 +6,34 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 12:44:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/06 14:33:05 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/07 16:07:08 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-int	ph_strcmp(const char *str1, const char *str2)
+int32_t	ph_atoi(const char *str)
+{
+	int	index;
+	int	result;
+
+	index = 0;
+	result = 0;
+	while ((str[index] > '0' && str[index] <= '9') && str[index])
+	{	
+		result = result * 10;
+		result = (result + (str[index] - '0'));
+		index++;
+	}
+	if (str[index] != '\0')
+	{
+		error_message(ERROR_INPUT);
+		exit(ERROR_INPUT);
+	}
+	return (result);
+}
+
+int32_t	ph_strcmp(const char *str1, const char *str2)
 {
 	size_t	index;
 
@@ -26,7 +47,7 @@ int	ph_strcmp(const char *str1, const char *str2)
 		return (1);
 }
 
-static uint32_t	ph_strlen(const char *str)
+static int32_t ph_strlen(const char *str)
 {
 	int	len;
 	if (!str)
@@ -45,4 +66,19 @@ void	ph_putstr_fd(const int fd, const char *message)
 		return ;
 	}
 	write (fd, message, ph_strlen(message));
+}
+
+
+void	ph_bzero(void *s, size_t amount)
+{
+	char	*zeroed_string;
+	size_t	index;
+
+	zeroed_string = (char *)s;
+	index = 0;
+	while (index < amount)
+	{
+		zeroed_string[index] = '\0';
+		index++;
+	}
 }
