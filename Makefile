@@ -6,7 +6,7 @@
 #    By: cter-maa <cter-maa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/09/07 12:45:06 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/09/07 16:46:37 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ INCLUDE = -I ./include
 SRC			= src/philo/input_error_handling.c \
 			src/philo/input_parsing.c \
 			src/philo/main.c \
-			src/utils/utils_error.c \
 			src/utils/utils.c \
 
 # OBJECTS
@@ -69,12 +68,12 @@ fsan:
 resan: fclean fsan
 
 clean:
-	$(RM) $(OBJ)
-	@echo "$(YELLOW)philo object files are removed $(DEF_COLOR)"
+	find . -type f -name "*.o" -delete
+	@echo "$(YELLOW)object files are removed $(DEF_COLOR)"
 
 fclean: clean
 	$(RM) $(NAME) 
-	@echo "$(RED)philo objectfiles and executable are removed $(DEF_COLOR)"
+	@echo "$(RED)executable is removed $(DEF_COLOR)"
 
 re: fclean all
 

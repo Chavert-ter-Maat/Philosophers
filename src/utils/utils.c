@@ -6,16 +6,16 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 12:44:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/07 16:07:08 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/07 16:48:59 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-int32_t	ph_atoi(const char *str)
+long long int	ph_atoi(const char *str)
 {
 	int	index;
-	int	result;
+	long long int	result;
 
 	index = 0;
 	result = 0;
@@ -25,7 +25,7 @@ int32_t	ph_atoi(const char *str)
 		result = (result + (str[index] - '0'));
 		index++;
 	}
-	if (str[index] != '\0')
+	if (str[index] != '\0' || result < INT_MIN || result > INT_MAX)
 	{
 		error_message(ERROR_INPUT);
 		exit(ERROR_INPUT);

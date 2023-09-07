@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/07 16:01:12 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/07 16:26:56 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int32_t	input_parsing(t_philo *ph, char **argv)
 {
+	ph_bzero(ph, sizeof(ph));
 	ph->nbr_philo = ph_atoi(argv[1]);
 	ph->time_die = ph_atoi(argv[2]);
 	ph->time_eat = ph_atoi(argv[3]);
@@ -22,6 +23,7 @@ int32_t	input_parsing(t_philo *ph, char **argv)
 		ph->nbr_meal = ph_atoi(argv[5]);
 	else
 		ph->nbr_meal = -1;
+	
 	printf("%i\n", ph->nbr_philo);
 	printf("%i\n", ph->time_die);
 	printf("%i\n", ph->time_eat);
