@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/07 16:15:16 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/11 15:12:59 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 int	main(int argc, char **argv)
 {
-	int	status;
-	t_philo	ph;
+	t_data	data;
+	int		status;
 	
 	status = input_error_handling(argc, argv);
 	if (status != SUCCESS)
-		return(status);
-	status = input_parsing(&ph, argv);
+		return(status); // change to free & exit
+	status = input_parsing(&data, argv);
 	if (status != SUCCESS)
-		return(status);
-
+		return(status); // change to free & exit
+	status = setup_threads(data);
+	if (status != SUCCESS) 
+		return (status); // change to free & exit
 	//free allocations	
 	return(status);
 }

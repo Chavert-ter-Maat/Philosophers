@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 12:44:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/07 16:48:59 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/11 13:06:29 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long long int	ph_atoi(const char *str)
 
 	index = 0;
 	result = 0;
-	while ((str[index] > '0' && str[index] <= '9') && str[index])
+	while ((str[index] >= '0' && str[index] <= '9') && str[index])
 	{	
 		result = result * 10;
 		result = (result + (str[index] - '0'));
@@ -55,7 +55,7 @@ static int32_t ph_strlen(const char *str)
 	len = 0;
 	while(str[len])
 		len++;
-	return(len);
+	return (len);
 }
 
 void	ph_putstr_fd(const int fd, const char *message)
