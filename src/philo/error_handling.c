@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:52 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/11 16:12:52 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/14 11:22:09 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int32_t	help_message(void)
 	return (SUCCESS);
 }
 
-int32_t	input_error_handling(int argc, char **argv)
+int32_t	error_handling(int argc, char **argv)
 {
 	if (argc == 2 && (ph_strcmp(argv[1], "help") == 0))
 		return (help_message());

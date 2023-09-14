@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/11 15:12:59 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/14 12:57:31 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	int		status;
+	t_args		args;
+	t_philo		*philo;
+	int			status;
 	
-	status = input_error_handling(argc, argv);
+	status = error_handling(argc, argv);
 	if (status != SUCCESS)
-		return(status); // change to free & exit
-	status = input_parsing(&data, argv);
+		return(status); 
+	status = argument_parsing(&args, argv);
 	if (status != SUCCESS)
-		return(status); // change to free & exit
-	status = setup_threads(data);
+		return(status); 
+	//protect single philo
+	status = allocate_philo_struct(&args, &philo);
 	if (status != SUCCESS) 
-		return (status); // change to free & exit
+	{
+		// free *philo
+		return (status);
+	}
 	//free allocations	
 	return(status);
 }
