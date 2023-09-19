@@ -3,10 +3,10 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: cter-maa <cter-maa@student.codam.nl>         +#+                      #
+#    By: cter-maa <cter-maa@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/09/11 14:31:38 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/09/18 16:27:02 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,9 @@ INCLUDE = -I ./include
 # SOURCES
 SRC			= src/philo/error_handling.c \
 			src/philo/input_parsing.c \
-			src/philo/setup_threads.c \
+			src/philo/init_structs.c \
 			src/philo/main.c \
+			src/philo/run_philo.c \
 			src/utils/utils.c \
 
 # OBJECTS

@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
+/*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 12:44:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/11 13:06:29 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/18 12:04:45 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

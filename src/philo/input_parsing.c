@@ -3,60 +3,21 @@
 /*                                                        ::::::::            */
 /*   input_parsing.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
+/*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:03:26 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/18 16:22:18 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-static int32_t allocate_node(t_philo *philo, t_args *args, \
-pthread_mutex_t *chops, int32_t nbr)
+int32_t single_philo(t_args *args)
 {
-	philo->id = nbr + 1;
-	philo->thread = malloc(sizeof(pthread_t));
-	if(!philo->thread)
-		return(ERROR_ALLOCATION);
-	philo->time_last_eat = get_time_ms();
-	
-	philo->status = EAT;
-	pthread_mutex_init(&philo->eating, NULL);
-	philo->chops_r = &chops[nbr];
-	pthread_mutex_init(&chops[nbr], NULL);
-	philo->chops_l = &chops[nbr + 1];
-	philo->args = args;
-	return (SUCCESS);
-}
-
-int32_t join_thread()
-{
-	
-}
-
-int32_t allocate_philo_struct(t_args *args, t_philo **philo)
-{
-	pthread_mutex_t	*chops;
-	int32_t index;
-	
-	index = 0;
-	chops = malloc(sizeof(pthread_mutex_t) * args->nbr_philo);
-	if (!chops)
-		return (ERROR_ALLOCATION);
-	philo = malloc(sizeof(t_philo) * (args->nbr_philo));
-	if (!philo)
-	{
-		free(chops);
-		return (ERROR_ALLOCATION);
-	}
-	while (index < args->nbr_philo)
-	{
-		if (allocate_node(&philo[index], args, chops, index) != SUCCESS);
-			return(ERROR_ALLOCATION); // free philo and chops!
-		index++;
-	}
-	return (SUCCESS);
+    (void)* args;
+    
+    printf("single philo has died"); //adjust
+    return (SUCCESS);
 }
 
 int32_t	argument_parsing(t_args *args, char **argv)
@@ -73,6 +34,8 @@ int32_t	argument_parsing(t_args *args, char **argv)
 	if (args->nbr_philo < 1 || args->nbr_philo > 200 || args->time_die < 1 \
 	 	|| args->time_eat < 1 || args->time_sleep < 1 \
 		|| (argv[4] && args->nbr_meal < 1))
-		return (INPUT_ERROR);
+		return (error_message(INPUT_ERROR));
+	if (args->nbr_philo == 1)
+		return (single_philo(args));
 	return (SUCCESS);
 }
