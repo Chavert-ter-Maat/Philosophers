@@ -6,7 +6,7 @@
 #    By: cter-maa <cter-maa@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/09/18 16:27:02 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/09/20 14:14:28 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ SRC			= src/philo/error_handling.c \
 			src/philo/input_parsing.c \
 			src/philo/init_structs.c \
 			src/philo/main.c \
+			src/philo/philo_actions.c \
 			src/philo/run_philo.c \
+			src/utils/free.c \
+			src/utils/time.c \
 			src/utils/utils.c \
 
 # OBJECTS

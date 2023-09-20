@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/19 13:52:48 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/20 16:11:10 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <sys/time.h>
 
 // defines
-# define	UNEVEN	2
+# define	UNEVEN	% 2
 # define 	FORMAT	"%d %d %s\n"
 
 // enum
@@ -57,19 +57,21 @@ typedef struct s_args
 	int32_t				time_die;
 	int32_t				time_eat;
 	int32_t				time_sleep;
-	int32_t				nbr_meal;
+	int32_t				max_meals;
 }	t_args;
 
 typedef struct s_philo
 {
 	int32_t				id;
-	pthread_t			*thread;
+	pthread_t			*thread_id;
 	int32_t				time_start;
 	int32_t				time_last_eat;
 	int32_t				meals_eaten;
 	int32_t				status;
+	pthread_mutex_t		print_msg;
 	pthread_mutex_t		eating;
 	struct s_main		*main;
+	struct s_args		*args;
 }	t_philo;
 
 typedef struct s_main
@@ -79,6 +81,11 @@ typedef struct s_main
 	t_args				*args;
 	t_philo				*philo;
 }	t_main;
+
+// philo_actions
+void	go_eat(t_philo *philo);
+void	go_sleep(t_philo *philo);
+void	go_think(t_philo *philo);
 
 // error_handling
 int32_t			error_handling(int argc, char **argv);
@@ -91,12 +98,18 @@ int32_t			argument_parsing(t_args *args, char **argv);
 int32_t 		allocate_main(t_main *main);
 
 // run_philo
-int32_t 		create_threads(t_main *main);
+int32_t			run_philo(t_main *main);
 
 // utils
 int32_t			ph_strcmp(const char *str1, const char *str2);
 long long int	ph_atoi(const char *str);
 void			ph_putstr_fd(const int fd, const char *message);
 void			ph_bzero(void *s, size_t amount);
+
+// utils_time
+int64_t			time_of_day_ms(void);
+
+// utils_free
+int32_t			philo_thread_join(t_philo *philo);
 
 #endif

@@ -6,35 +6,43 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 15:06:10 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/19 14:25:39 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/20 16:15:15 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-int32_t	set_time(t_philo *philo, int32_t *start_time)
-{
-	gettimeofday(&philo->time_start, NULL);
-	pthread_mutex_lock(&philo->main->start);
+// int32_t	set_time(t_philo *philo, int32_t *start_time)
+// {
 	
-	pthread_mutex_unlock(&philo->main->start);
-}
+// 	pthread_mutex_lock(&philo->main->start);
+	
+// 	pthread_mutex_unlock(&philo->main->start);
+// 	pthread_mutex_lock(&philo->eating);
+	
+// 	pthread_mutex_unlock(&philo->eating);	
+// }
 
 void	*action_sequence(void *arg)
 {
 	t_philo		*philo;
-	int32_t		*start_time;
+	// int32_t		*start_time;
 	
 	philo = (t_philo*) arg;
-	
-	if (set_time(philo, &start_time) != SUCCESS)
-		return (NULL);
+	printf("komt ie hier\n");
+		
 	pthread_mutex_lock(&philo->main->start);
 	pthread_mutex_unlock(&philo->main->start);
-	if ((philo->id % UNEVEN) == 0)
+	if ((philo->id % 2) != 0)
+	{
+		usleep(500);
+		go_think(philo);
+	}
 	while (1)
 	{
-		
+		go_eat(philo);
+		go_sleep(philo);
+		go_think(philo);
 	}
 	return (NULL);
 }
@@ -50,14 +58,29 @@ int32_t create_threads(t_main *main)
 	pthread_mutex_lock(&main->start);
 	while (i < max_philos)
 	{
-		status = pthread_create(main->philo[i].thread, NULL, action_sequence, &main->philo[i]);
+		status = pthread_create(main->philo[i].thread_id, NULL, action_sequence, &main->philo[i]);
 		if (status != SUCCESS)
-		{
-			// free
-			return (error_message(ERROR_THREAD));
-		}
+			return (ERROR_THREAD);
 		i++;
 	}
 	pthread_mutex_unlock(&main->start);
 	return (SUCCESS);
 }
+
+int32_t	run_philo(t_main *main)
+{
+	main->philo->time_start = time_of_day_ms();
+	if (create_threads(main) != SUCCESS)
+		return (ERROR_THREAD);
+	if (philo_thread_join(main->philo) != SUCCESS)
+		return (ERROR_THREAD);
+	return (SUCCESS);
+}
+
+// main thread checken of philo genoeg te eten heeft
+// sleep functie maken om een groep te laten wachten dan zijn ze aan het denken
+// mutex printf-en
+// oneven eerst eten
+// bij simulatie starten time last meal start setten
+
+
