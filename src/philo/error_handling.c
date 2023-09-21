@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:52 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/20 15:32:02 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/21 09:59:16 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int32_t	error_message(int32_t status)
 	ph_putstr_fd(STDERR_FILENO, error_message[status]);
 	ph_putstr_fd(STDERR_FILENO, "\n");
 	ph_putstr_fd(STDERR_FILENO, "philo: './philo help' for more info\n");
+	usleep(500000);
 	ph_putstr_fd(STDERR_FILENO, "exit\n");
 	return (status);
 }

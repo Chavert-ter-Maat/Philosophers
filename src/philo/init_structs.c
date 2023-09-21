@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 14:39:05 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/20 16:04:24 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/21 14:24:40 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,41 @@ static int32_t init_philos(t_main *main, t_philo *philo, int32_t nbr)
 	return (SUCCESS);
 }
 
-int32_t allocate_main(t_main *main)
+static void	init_mutexes(t_main *main)
 {
-	int32_t index;
+	int32_t	index;
+	int32_t	max_philos;
 
 	index = 0;
+	max_philos = main->args->nbr_philo;
 	pthread_mutex_init(&(main->start), NULL);
+	while (index < max_philos)
+	{
+		pthread_mutex_init(&main->chops[index], NULL);
+		index++;
+	}
+}
+
+int32_t init_philo(t_main *main, t_philo **philo)
+{
+	int32_t	index;
+	int32_t	max_philos;
+
+	index = 0;
+	max_philos = main->args->nbr_philo;
 	main->chops = malloc(sizeof(pthread_mutex_t) * (main->args->nbr_philo));
 	if (!main->chops)
 		return (ERROR_ALLOCATION);
-	main->philo = malloc(sizeof(t_philo) * (main->args->nbr_philo));
-	if (!main->philo)
+	*philo = malloc(sizeof(t_philo) * (main->args->nbr_philo));
+	if (!philo)
 		return (ERROR_ALLOCATION);
-	while (index < main->args->nbr_philo)
+	init_mutexes(main);
+	while (index < max_philos)
 	{
-		pthread_mutex_init(&main->chops[index], NULL);
-		if (init_philos(main, main->philo, index) != SUCCESS)
-			return (ERROR_ALLOCATION); // free philo and chops!
+		if (init_philos(main, &philo[0][index], index) != SUCCESS)
+			return (ERROR_ALLOCATION);
 		index++;
 	}
+	init_mutexes(main);
 	return (SUCCESS);
 }

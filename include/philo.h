@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/20 16:11:10 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/21 13:41:09 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_args
 typedef struct s_philo
 {
 	int32_t				id;
-	pthread_t			*thread_id;
+	pthread_t			thread_id;
 	int32_t				time_start;
 	int32_t				time_last_eat;
 	int32_t				meals_eaten;
@@ -95,7 +95,7 @@ int32_t			error_message(int32_t status);
 int32_t			argument_parsing(t_args *args, char **argv);
 
 // allocate_structs
-int32_t 		allocate_main(t_main *main);
+int32_t 		init_philo(t_main *main, t_philo **philo);
 
 // run_philo
 int32_t			run_philo(t_main *main);

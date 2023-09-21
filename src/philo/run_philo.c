@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 15:06:10 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/20 16:15:15 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/21 11:44:29 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	*action_sequence(void *arg)
 	// int32_t		*start_time;
 	
 	philo = (t_philo*) arg;
-	printf("komt ie hier\n");
 		
+	printf(" ie ie voor de lock?\n");
 	pthread_mutex_lock(&philo->main->start);
 	pthread_mutex_unlock(&philo->main->start);
 	if ((philo->id % 2) != 0)
 	{
+	printf("na de lock\n");
 		usleep(500);
 		go_think(philo);
 	}
@@ -58,9 +59,13 @@ int32_t create_threads(t_main *main)
 	pthread_mutex_lock(&main->start);
 	while (i < max_philos)
 	{
-		status = pthread_create(main->philo[i].thread_id, NULL, action_sequence, &main->philo[i]);
+		status = pthread_create(&main->philo[i].thread_id, NULL, action_sequence, &main->philo[i]);
 		if (status != SUCCESS)
+		{
+			printf("error creating threads");
+			exit(1);
 			return (ERROR_THREAD);
+		}
 		i++;
 	}
 	pthread_mutex_unlock(&main->start);

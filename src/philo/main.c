@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/20 16:16:02 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/21 13:43:10 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_main		main;
 	t_args		args;
+	t_philo		*philo;
 	int			status;
 	
 	status = error_handling(argc, argv);
@@ -25,13 +26,14 @@ int	main(int argc, char **argv)
 	if (status != SUCCESS)
 		return(status); 
 	main.args = &args;
-	status = allocate_main(&main);
+	status = init_philo(&main, &philo);
 	if (status != SUCCESS) 
 	{
 		// free *philo
 		//free  chops
 		return (status);
-	}
+	} 
+	main.philo = philo;
 	status = run_philo(&main);
 	if (status != SUCCESS) 
 	{
