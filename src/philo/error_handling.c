@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:52 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/21 09:59:16 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/22 11:18:22 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int32_t	error_message(int32_t status)
 	ph_putstr_fd(STDERR_FILENO, error_message[status]);
 	ph_putstr_fd(STDERR_FILENO, "\n");
 	ph_putstr_fd(STDERR_FILENO, "philo: './philo help' for more info\n");
-	usleep(500000);
 	ph_putstr_fd(STDERR_FILENO, "exit\n");
 	return (status);
 }
@@ -38,7 +37,6 @@ static void	help_message(void)
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 3 = time to eat\n");
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 4 = time to sleep\n");
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 5 = max times eat (optional)\n");
-	usleep(500000);
 	ph_putstr_fd(STDERR_FILENO, "exit\n");
 	exit (0);
 

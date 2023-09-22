@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 11:02:14 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/21 11:16:24 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/22 11:29:00 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int32_t philo_thread_join(t_philo *philo)
 	index = 0;
 	while (index < philo->args->nbr_philo)
 	{
-		if (pthread_join(philo[index].thread_id, NULL) != SUCCESS)
+		if (pthread_join(*philo[index].thread_id, NULL) != SUCCESS)
 			return (ERROR_THREAD);
 		index++;
 	}

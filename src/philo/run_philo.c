@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 15:06:10 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/21 11:44:29 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/22 15:41:40 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // 	pthread_mutex_unlock(&philo->main->start);
 // 	pthread_mutex_lock(&philo->eating);
 	
-// 	pthread_mutex_unlock(&philo->eating);	
+// 	pthread_mutex_unlock(&philo->eating);
 // }
 
 void	*action_sequence(void *arg)
@@ -29,13 +29,10 @@ void	*action_sequence(void *arg)
 	// int32_t		*start_time;
 	
 	philo = (t_philo*) arg;
-		
-	printf(" ie ie voor de lock?\n");
 	pthread_mutex_lock(&philo->main->start);
 	pthread_mutex_unlock(&philo->main->start);
 	if ((philo->id % 2) != 0)
 	{
-	printf("na de lock\n");
 		usleep(500);
 		go_think(philo);
 	}
@@ -59,7 +56,7 @@ int32_t create_threads(t_main *main)
 	pthread_mutex_lock(&main->start);
 	while (i < max_philos)
 	{
-		status = pthread_create(&main->philo[i].thread_id, NULL, action_sequence, &main->philo[i]);
+		status = pthread_create(main->philo[i].thread_id, NULL, action_sequence, &main->philo[i]);
 		if (status != SUCCESS)
 		{
 			printf("error creating threads");
@@ -68,6 +65,7 @@ int32_t create_threads(t_main *main)
 		}
 		i++;
 	}
+	main->start_time = time_of_day_ms();
 	pthread_mutex_unlock(&main->start);
 	return (SUCCESS);
 }

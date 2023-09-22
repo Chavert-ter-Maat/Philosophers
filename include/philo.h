@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/21 13:41:09 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/22 15:41:17 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ typedef struct s_args
 typedef struct s_philo
 {
 	int32_t				id;
-	pthread_t			thread_id;
-	int32_t				time_start;
+	pthread_t			*thread_id;
 	int32_t				time_last_eat;
 	int32_t				meals_eaten;
 	int32_t				status;
 	pthread_mutex_t		print_msg;
 	pthread_mutex_t		eating;
+	pthread_mutex_t		*chop_left;
+	pthread_mutex_t		*chop_right;
 	struct s_main		*main;
 	struct s_args		*args;
 }	t_philo;
@@ -78,6 +79,7 @@ typedef struct s_main
 {
 	pthread_mutex_t		*chops;
 	pthread_mutex_t		start;
+	int32_t				start_time;
 	t_args				*args;
 	t_philo				*philo;
 }	t_main;
