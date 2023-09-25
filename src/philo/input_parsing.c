@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/20 15:55:15 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/25 15:09:13 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int32_t	argument_parsing(t_args *args, char **argv)
 		args->max_meals = -1;
 	if (args->nbr_philo < 1 || args->nbr_philo > 200 || args->time_die < 1 \
 	 	|| args->time_eat < 1 || args->time_sleep < 1)
-			return (INPUT_ERROR);
+			return (ERROR_INPUT);
 	if (args->nbr_philo == 1)
 		return (single_philo(args));
 	print_args(args);

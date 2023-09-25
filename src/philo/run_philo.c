@@ -6,35 +6,31 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 15:06:10 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/22 15:41:40 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/25 14:58:26 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-// int32_t	set_time(t_philo *philo, int32_t *start_time)
-// {
-	
-// 	pthread_mutex_lock(&philo->main->start);
-	
-// 	pthread_mutex_unlock(&philo->main->start);
-// 	pthread_mutex_lock(&philo->eating);
-	
-// 	pthread_mutex_unlock(&philo->eating);
-// }
+void	set_time(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->eating);
+	philo->time_last_eat = philo->main->start_time;
+	pthread_mutex_unlock(&philo->eating);
+}
 
 void	*action_sequence(void *arg)
 {
 	t_philo		*philo;
-	// int32_t		*start_time;
 	
 	philo = (t_philo*) arg;
 	pthread_mutex_lock(&philo->main->start);
 	pthread_mutex_unlock(&philo->main->start);
+	// set_time(philo);
 	if ((philo->id % 2) != 0)
 	{
-		usleep(500);
 		go_think(philo);
+		usleep(500);
 	}
 	while (1)
 	{
@@ -72,7 +68,7 @@ int32_t create_threads(t_main *main)
 
 int32_t	run_philo(t_main *main)
 {
-	main->philo->time_start = time_of_day_ms();
+	main->start_time = time_of_day_ms();
 	if (create_threads(main) != SUCCESS)
 		return (ERROR_THREAD);
 	if (philo_thread_join(main->philo) != SUCCESS)

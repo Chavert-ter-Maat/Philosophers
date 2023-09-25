@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/22 15:41:17 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/25 16:08:45 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 // defines
 # define	UNEVEN	% 2
+# define	LEFT	1
+# define	RIGHT	0
 # define 	FORMAT	"%d %d %s\n"
 
 // enum
@@ -34,9 +36,6 @@ typedef enum e_error
 	ERROR_INPUT,
 	ERROR_ALLOCATION,
 	ERROR_THREAD,
-	ARGUMENT_ERROR,
-	INPUT_ERROR,
-	ALLOCATION_ERROR,
 }	t_error;
 
 // structures
@@ -69,8 +68,11 @@ typedef struct s_philo
 	int32_t				status;
 	pthread_mutex_t		print_msg;
 	pthread_mutex_t		eating;
-	pthread_mutex_t		*chop_left;
-	pthread_mutex_t		*chop_right;
+	
+	int32_t				right;
+	int32_t				left;
+	// pthread_mutex_t		*chop_left;
+	// pthread_mutex_t		*chop_right;
 	struct s_main		*main;
 	struct s_args		*args;
 }	t_philo;
@@ -110,6 +112,7 @@ void			ph_bzero(void *s, size_t amount);
 
 // utils_time
 int64_t			time_of_day_ms(void);
+void			time_sleep(int64_t sleep_ms);
 
 // utils_free
 int32_t			philo_thread_join(t_philo *philo);
