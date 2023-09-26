@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 14:39:05 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/25 15:03:21 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/26 09:53:11 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@ static int32_t init_philos(t_main *main, t_philo *philo, int32_t nbr)
 	philo->id = nbr + 1;
 	philo->right = nbr;
 	philo->left = philo->id % philo->args->nbr_philo;
-
-	// philo->chop_right = &main->chops[nbr];
-	// if (philo->id == main->args->nbr_philo - 1)
-	// 	philo->chop_left = &main->chops[0];
-	// else 
-	// 	philo->chop_left = &main->chops[nbr + 1];
 	philo->thread_id = malloc(sizeof(pthread_t));
 	if(!philo->thread_id)
 		return(ERROR_ALLOCATION);

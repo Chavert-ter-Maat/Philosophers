@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/25 16:08:45 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/26 13:14:54 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,22 @@ typedef struct s_philo
 	
 	int32_t				right;
 	int32_t				left;
-	// pthread_mutex_t		*chop_left;
-	// pthread_mutex_t		*chop_right;
 	struct s_main		*main;
 	struct s_args		*args;
 }	t_philo;
 
 typedef struct s_main
 {
+	int32_t				nbr_full_philo;
 	pthread_mutex_t		*chops;
 	pthread_mutex_t		start;
 	int32_t				start_time;
 	t_args				*args;
 	t_philo				*philo;
 }	t_main;
+
+// create_threads
+int32_t	create_threads(t_main *main);
 
 // philo_actions
 void	go_eat(t_philo *philo);
@@ -111,8 +113,8 @@ void			ph_putstr_fd(const int fd, const char *message);
 void			ph_bzero(void *s, size_t amount);
 
 // utils_time
-int64_t			time_of_day_ms(void);
-void			time_sleep(int64_t sleep_ms);
+int32_t			time_of_day_ms(void);
+void			sleep_function(int32_t sleep_ms);
 
 // utils_free
 int32_t			philo_thread_join(t_philo *philo);

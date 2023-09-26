@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   run_philo.c                                        :+:    :+:            */
+/*   create_threads.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
+/*   By: chaverttermaat <chaverttermaat@student.      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/09/18 15:06:10 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/26 13:12:26 by chavertterm   ########   odam.nl         */
+/*   Created: 2023/09/26 13:13:51 by chavertterm   #+#    #+#                 */
+/*   Updated: 2023/09/26 13:16:01 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,3 @@ int32_t create_threads(t_main *main)
 	pthread_mutex_unlock(&main->start);
 	return (SUCCESS);
 }
-
-int32_t	run_philo(t_main *main)
-{
-	main->start_time = time_of_day_ms();
-	if (create_threads(main) != SUCCESS)
-		return (ERROR_THREAD);
-	if (philo_thread_join(main->philo) != SUCCESS)
-		return (ERROR_THREAD);
-	check_state_philo(main->philo);
-	return (SUCCESS);
-}
-
-// main thread checken of philo genoeg te eten heeft
-// sleep functie maken om een groep te laten wachten dan zijn ze aan het denken
-// mutex printf-en
-// oneven eerst eten
-// bij simulatie starten time last meal start setten
-
-

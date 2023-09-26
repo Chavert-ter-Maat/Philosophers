@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:52 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/22 11:18:22 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/26 10:00:25 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int32_t	error_message(int32_t status)
 	ph_putstr_fd(STDERR_FILENO, "\n");
 	ph_putstr_fd(STDERR_FILENO, "philo: './philo help' for more info\n");
 	ph_putstr_fd(STDERR_FILENO, "exit\n");
-	return (status);
+	exit (status);
 }
 
 static void	help_message(void)
@@ -38,7 +38,7 @@ static void	help_message(void)
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 4 = time to sleep\n");
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 5 = max times eat (optional)\n");
 	ph_putstr_fd(STDERR_FILENO, "exit\n");
-	exit (0);
+	exit (SUCCESS);
 
 }
 
@@ -47,9 +47,9 @@ int32_t	error_handling(int argc, char **argv)
 	if (argc == 2 && (ph_strcmp(argv[1], "help") == 0))
 		help_message();
 	if (argc < 5 || argc > 6)
-		return (error_message(ERROR_INPUT));
+		return (ERROR_INPUT);
 	if (!*argv[0] || !*argv[1] || !*argv[2] || !*argv[3]
 		|| (argv[4] && !*argv[4]))
-		return (error_message(ERROR_INPUT));
+		return (ERROR_INPUT);
 	return (SUCCESS);
 }

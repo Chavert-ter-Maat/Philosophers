@@ -6,7 +6,7 @@
 #    By: cter-maa <cter-maa@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/09/25 14:40:08 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/09/26 13:15:25 by chavertterm   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SANITIZE	= -fsanitize=address
 INCLUDE = -I ./include 
 
 # SOURCES
-SRC			= src/philo/error_handling.c \
+SRC			= src/philo/create_threads.c \
+			src/philo/error_handling.c \
 			src/philo/input_parsing.c \
 			src/philo/init_structs.c \
 			src/philo/main.c \
