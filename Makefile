@@ -6,7 +6,7 @@
 #    By: cter-maa <cter-maa@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/09/26 13:15:25 by chavertterm   ########   odam.nl          #
+#    Updated: 2023/09/27 10:23:10 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ INCLUDE = -I ./include
 SRC			= src/philo/create_threads.c \
 			src/philo/error_handling.c \
 			src/philo/input_parsing.c \
-			src/philo/init_structs.c \
+			src/philo/initialization.c \
 			src/philo/main.c \
-			src/philo/philo_actions.c \
+			src/philo/action_sequence.c \
 			src/philo/run_philo.c \
 			src/utils/free.c \
 			src/utils/time.c \
