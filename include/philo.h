@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/26 13:14:54 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/27 10:17:12 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_main
 }	t_main;
 
 // create_threads
-int32_t	create_threads(t_main *main);
+int32_t create_threads(t_main *main);
 
 // philo_actions
 void	go_eat(t_philo *philo);

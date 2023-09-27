@@ -3,23 +3,28 @@
 /*                                                        ::::::::            */
 /*   create_threads.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: chaverttermaat <chaverttermaat@student.      +#+                     */
+/*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 13:13:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/09/26 13:16:01 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/27 10:18:54 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-void	set_time(t_philo *philo)
+// void	check_state_philo(t_philo *philo)
+// {
+		
+// }
+
+static void	set_time(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->eating);
 	philo->time_last_eat = philo->main->start_time;
 	pthread_mutex_unlock(&philo->eating);
 }
 
-void	*action_sequence(void *arg)
+static void	*action_sequence(void *arg)
 {
 	t_philo		*philo;
 	

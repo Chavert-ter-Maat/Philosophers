@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 13:21:44 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/26 13:09:22 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/27 10:06:24 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	check_meals_eaten(t_philo *philo)
 	pthread_mutex_lock(&philo->main->start);
 	max_meals = philo->args->max_meals;
 	if (current_meals_eaten == max_meals)
-		philo->main->nbr_full_philo;
+		philo->main->nbr_full_philo += 1;
 	pthread_mutex_unlock(&philo->main->start);
 }
 
