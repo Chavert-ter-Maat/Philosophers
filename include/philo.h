@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/27 16:10:34 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/27 16:17:39 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	go_sleep(t_philo *philo);
 void	go_think(t_philo *philo);
 
 int32_t create_threads(t_shared *main);
-// void	*action_sequence(void *arg);
+void	*action_sequence(void *arg);
 
 // error_handling
 int32_t			error_handling(int argc, char **argv);

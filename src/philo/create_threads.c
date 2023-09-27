@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 13:13:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/09/27 16:12:26 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/27 16:17:25 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,7 @@
 		
 // }
 
-static void	set_time(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->shared->eating);
-	philo->time_last_eat = philo->shared->start_time;
-	pthread_mutex_unlock(&philo->shared->eating);
-}
 
-static void	*action_sequence(void *arg)
-{
-	t_philo		*philo;
-	
-	philo = (t_philo*) arg;
-	pthread_mutex_lock(&philo->shared->start);
-	pthread_mutex_unlock(&philo->shared->start);
-	set_time(philo);
-	if ((philo->id % 2) == 1)
-	{
-		go_think(philo);
-		sleep_function(philo->args->time_eat / 2);
-	}
-	while (1)
-	{
-		go_eat(philo);
-		go_sleep(philo);
-		go_think(philo);
-	}
-	return (NULL);
-}
 
 int32_t create_threads(t_shared *shared)
 {
