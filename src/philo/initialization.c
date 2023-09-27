@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init_structs.c                                     :+:    :+:            */
+/*   initialization.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 14:39:05 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/26 09:53:11 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/27 16:13:12 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-static int32_t init_philos(t_main *main, t_philo *philo, int32_t nbr)
+static int32_t init_philos(t_shared *shared, t_philo *philo, int32_t nbr)
 {
-	philo->args = main->args;
-	philo->main = main;
+	philo->shared = shared;
+	philo->args = shared->args;
 	philo->id = nbr + 1;
 	philo->right = nbr;
 	philo->left = philo->id % philo->args->nbr_philo;
@@ -24,42 +24,43 @@ static int32_t init_philos(t_main *main, t_philo *philo, int32_t nbr)
 		return(ERROR_ALLOCATION);
 	philo->time_last_eat = 0;
 	philo->status = EAT;
-	pthread_mutex_init(&(philo->print_msg), NULL);
 	return (SUCCESS);
 }
 
-static void	init_mutexes(t_main *main)
+static void	init_mutexes(t_shared *shared)
 {
 	int32_t	index;
 	int32_t	max_philos;
 
 	index = 0;
-	max_philos = main->args->nbr_philo;
-	pthread_mutex_init(&(main->start), NULL);
+	max_philos = shared->args->nbr_philo;
+	pthread_mutex_init(&(shared->print_msg), NULL);
+	pthread_mutex_init(&(shared->eating), NULL);
+	pthread_mutex_init(&(shared->start), NULL);
 	while (index < max_philos)
 	{
-		pthread_mutex_init(&main->chops[index], NULL);
+		pthread_mutex_init(&shared->chops[index], NULL);
 		index++;
 	}
 }
 
-int32_t init_philo(t_main *main, t_philo **philo)
+int32_t init_philo(t_shared *shared, t_philo **philo)
 {
 	int32_t	index;
 	int32_t	max_philos;
 
 	index = 0;
-	max_philos = main->args->nbr_philo;
-	main->chops = malloc(sizeof(pthread_mutex_t) * (main->args->nbr_philo));
-	if (!main->chops)
+	max_philos = shared->args->nbr_philo;
+	shared->chops = malloc(sizeof(pthread_mutex_t) * (shared->args->nbr_philo));
+	if (!shared->chops)
 		return (ERROR_ALLOCATION);
-	*philo = malloc(sizeof(t_philo) * (main->args->nbr_philo));
+	*philo = malloc(sizeof(t_philo) * (shared->args->nbr_philo));
 	if (!philo)
 		return (ERROR_ALLOCATION);
-	init_mutexes(main);
+	init_mutexes(shared);
 	while (index < max_philos)
 	{
-		if (init_philos(main, &philo[0][index], index) != SUCCESS)
+		if (init_philos(shared, &philo[0][index], index) != SUCCESS)
 			return (ERROR_ALLOCATION);
 		index++;
 	}
