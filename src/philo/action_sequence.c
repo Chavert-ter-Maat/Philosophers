@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 13:21:44 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/27 16:17:30 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/28 14:24:06 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,45 +27,32 @@ static void	check_meals_eaten(t_philo *philo)
 
 void	go_eat(t_philo *philo)
 {
-	// int32_t start_eat;
-	
 	pthread_mutex_lock(&philo->shared->chops[philo->right]);
-	//has taken fork
 	pthread_mutex_lock(&philo->shared->chops[philo->left]);
-	//has taken fork
-	pthread_mutex_lock(&philo->shared->print_msg);
-	printf(FORMAT, time_of_day_ms() - philo->start_time, philo->id, "eating");
-	pthread_mutex_unlock(&philo->shared->print_msg);
+	print_action(philo, CHOP);
+	print_action(philo, EATING);
 	sleep_function(philo->args->time_eat);
 	philo->meals_eaten += 1;
 	pthread_mutex_unlock(&philo->shared->chops[philo->left]);
 	pthread_mutex_unlock(&philo->shared->chops[philo->right]);
 	pthread_mutex_lock(&philo->shared->eating);
-	philo->time_last_eat = time_of_day_ms();
+	philo->time_last_eat = get_time(); // moet dit in mutex?
 	pthread_mutex_unlock(&philo->shared->eating);
-	philo->status = SLEEP;
+	philo->status = SLEEPING;
 	check_meals_eaten(philo);
 }
 
 void	go_sleep(t_philo *philo)
 {
-	const int32_t	start_sleep = time_of_day_ms();
-
-	pthread_mutex_lock(&philo->shared->print_msg);
-	printf(FORMAT, start_sleep - philo->start_time, philo->id,  "sleep");
-	pthread_mutex_unlock(&philo->shared->print_msg);
+	print_action(philo, SLEEPING);
 	sleep_function(philo->args->time_sleep);
-	philo->status = THINK;
+	philo->status = THINKING;
 }
 
 void	go_think(t_philo *philo)
 {
-	const int32_t	start_think = time_of_day_ms();
-	
-	pthread_mutex_lock(&philo->shared->print_msg);
-	printf(FORMAT, start_think - philo->start_time, philo->id,  "thinking");
-	pthread_mutex_unlock(&philo->shared->print_msg);
-	philo->status = EAT;
+	print_action(philo, THINKING);
+	philo->status = EATING;
 }
 
 void	*action_sequence(void *arg)
@@ -74,7 +61,7 @@ void	*action_sequence(void *arg)
 	
 	philo = (t_philo*) arg;
 	pthread_mutex_lock(&philo->shared->start);
-	philo->shared->start_time = time_of_day_ms();
+	philo->shared->start_time = get_time();
 	pthread_mutex_unlock(&philo->shared->start);
 	pthread_mutex_lock(&philo->shared->eating);
 	philo->time_last_eat = philo->shared->start_time;

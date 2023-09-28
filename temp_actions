@@ -5,7 +5,7 @@ void	go_eat(t_philo *philo)
 	int32_t start_eat;
 
 	pthread_mutex_lock(philo->print_msg);
-	start_eat = time_of_day_ms();
+	start_eat = get_time();
 	printf(FORMAT, start_eat - philo->main->start_time, philo->id, "eating");
 	pthread_mutex_unlock(philo->print_msg);
 	// pthread_mutex_lock(&philo->chop_left);
@@ -24,7 +24,7 @@ void	go_sleep(t_philo *philo)
 {
 	int32_t	start_sleep;
 	
-	start_sleep = time_of_day_ms();
+	start_sleep = get_time();
 	pthread_mutex_lock(philo->print_msg);
 	printf(FORMAT, start_sleep - philo->main->start_time, philo->id, "sleeping");
 	pthread_mutex_unlock(philo->print_msg);
@@ -33,7 +33,7 @@ void	go_sleep(t_philo *philo)
 
 void	go_think(t_philo *philo)
 {
-	int32_t start_think = time_of_day_ms();
+	int32_t start_think = get_time();
 	
 	printf(FORMAT, start_think - philo->main->start_time, philo->id, "thinking");
 	philo->status = EAT;

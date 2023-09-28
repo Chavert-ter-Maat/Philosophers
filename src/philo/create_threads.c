@@ -6,18 +6,11 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 13:13:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/09/27 16:17:25 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/28 14:14:32 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
-
-// void	check_state_philo(t_philo *philo)
-// {
-		
-// }
-
-
 
 int32_t create_threads(t_shared *shared)
 {
@@ -39,7 +32,6 @@ int32_t create_threads(t_shared *shared)
 		}
 		i++;
 	}
-	shared->start_time = time_of_day_ms();
 	pthread_mutex_unlock(&shared->start);
 	return (SUCCESS);
 }

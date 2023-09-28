@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/27 16:17:39 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/28 14:19:57 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ typedef enum e_error
 // structures
 typedef enum e_state
 {
-	CHOPS,
-	EAT,
-	SLEEP,
-	THINK,
-	DIE,
-	END,
+	CHOP,
+	EATING,
+	SLEEPING,
+	THINKING,
+	DIED,
+	FULL,
 	ERROR
 }	t_state;
 
@@ -89,6 +89,7 @@ typedef struct s_shared
 void	go_eat(t_philo *philo);
 void	go_sleep(t_philo *philo);
 void	go_think(t_philo *philo);
+void	print_action(t_philo *philo, int32_t state);
 
 int32_t create_threads(t_shared *main);
 void	*action_sequence(void *arg);
@@ -113,8 +114,8 @@ void			ph_putstr_fd(const int fd, const char *message);
 void			ph_bzero(void *s, size_t amount);
 
 // utils_time
-int32_t			time_of_day_ms(void);
-void sleep_function(int32_t sleep_ms);
+int32_t			get_time(void);
+void			sleep_function(int32_t sleep_ms);
 
 // utils_free
 int32_t			philo_thread_join(t_philo *philo);

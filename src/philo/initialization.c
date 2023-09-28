@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 14:39:05 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/27 16:13:12 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/28 13:50:21 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int32_t init_philos(t_shared *shared, t_philo *philo, int32_t nbr)
 	if(!philo->thread_id)
 		return(ERROR_ALLOCATION);
 	philo->time_last_eat = 0;
-	philo->status = EAT;
+	philo->status = EATING;
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 #    By: cter-maa <cter-maa@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/09/27 11:05:47 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/09/28 13:50:53 by chavertterm   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC			= src/philo/create_threads.c \
 			src/philo/initialization.c \
 			src/philo/main.c \
 			src/philo/action_sequence.c \
+			src/philo/print_actions.c \
 			src/utils/free.c \
 			src/utils/time.c \
 			src/utils/utils.c \

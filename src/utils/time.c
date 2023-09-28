@@ -6,13 +6,13 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 11:21:35 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/26 12:04:04 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/28 14:07:56 by chavertterm   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-int32_t	time_of_day_ms(void)
+int32_t	get_time(void)
 {
 	struct timeval	tv;
 
@@ -22,12 +22,12 @@ int32_t	time_of_day_ms(void)
 
 void sleep_function(int32_t sleep_ms)
 {
-    const int32_t start = time_of_day_ms();
+    const int32_t start = get_time();
     int32_t elapsed_ms;
 
     while (1)
     {
-        elapsed_ms = time_of_day_ms() - start;
+        elapsed_ms = get_time() - start;
         if (elapsed_ms >= sleep_ms)
             return;
         usleep(500);
