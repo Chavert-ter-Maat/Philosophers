@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 13:21:44 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:24:06 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/29 13:55:27 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 static void	check_meals_eaten(t_philo *philo)
 {
-	int32_t	current_meals_eaten;
-	int32_t	max_meals;
-
-	current_meals_eaten = philo->meals_eaten;
-	pthread_mutex_lock(&philo->shared->start);
-	max_meals = philo->args->max_meals;
-	if (current_meals_eaten == max_meals)
+	pthread_mutex_lock(&philo->shared->eating);
+	if (philo->meals_eaten == philo->args->max_meals && philo->status != FULL)
+	{
 		philo->shared->nbr_full_philo += 1;
-	pthread_mutex_unlock(&philo->shared->start);
+		philo->status = FULL;
+	}
+	pthread_mutex_unlock(&philo->shared->eating);
 }
 
 void	go_eat(t_philo *philo)
@@ -38,7 +36,8 @@ void	go_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->shared->eating);
 	philo->time_last_eat = get_time(); // moet dit in mutex?
 	pthread_mutex_unlock(&philo->shared->eating);
-	philo->status = SLEEPING;
+	if (philo->status != FULL)
+		philo->status = SLEEPING;
 	check_meals_eaten(philo);
 }
 
@@ -46,13 +45,15 @@ void	go_sleep(t_philo *philo)
 {
 	print_action(philo, SLEEPING);
 	sleep_function(philo->args->time_sleep);
-	philo->status = THINKING;
+	if (philo->status != FULL)
+		philo->status = THINKING;
 }
 
 void	go_think(t_philo *philo)
 {
 	print_action(philo, THINKING);
-	philo->status = EATING;
+	if (philo->status != FULL)
+		philo->status = EATING;
 }
 
 void	*action_sequence(void *arg)

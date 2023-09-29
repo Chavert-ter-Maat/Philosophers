@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/25 15:09:13 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/09/29 13:14:36 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int32_t single_philo(t_args *args)
 {
     (void)* args;
     
-    printf("single philo has died"); //adjust
-    return (SUCCESS);
+    printf("philo has died\n"); //adjust
+    exit(EXIT_FAILURE); // check exit!!
 }
 
 void	print_args(t_args *args)

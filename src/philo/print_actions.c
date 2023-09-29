@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   print_actions.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: chaverttermaat <chaverttermaat@student.      +#+                     */
+/*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 11:32:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/09/28 14:19:42 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/29 12:54:59 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_action(t_philo *philo, int32_t state)
 	
 	if (philo->status == DIED)
 		{
-			printf("philo has died");
+			printf("philo has died 2\n");
 			// join & free
 			exit(EXIT_SUCCESS);
 		}

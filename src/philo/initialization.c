@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 14:39:05 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/28 13:50:21 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/29 13:52:26 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,20 @@ static int32_t init_philos(t_shared *shared, t_philo *philo, int32_t nbr)
 	philo->thread_id = malloc(sizeof(pthread_t));
 	if(!philo->thread_id)
 		return(ERROR_ALLOCATION);
-	philo->time_last_eat = 0;
+	philo->time_last_eat = get_time();
 	philo->status = EATING;
 	return (SUCCESS);
 }
 
-static void	init_mutexes(t_shared *shared)
+static void	init_shared(t_shared *shared)
 {
 	int32_t	index;
 	int32_t	max_philos;
 
 	index = 0;
 	max_philos = shared->args->nbr_philo;
+	shared->nbr_full_philo = 0;
+	shared->start_time = get_time();
 	pthread_mutex_init(&(shared->print_msg), NULL);
 	pthread_mutex_init(&(shared->eating), NULL);
 	pthread_mutex_init(&(shared->start), NULL);
@@ -44,7 +46,7 @@ static void	init_mutexes(t_shared *shared)
 	}
 }
 
-int32_t init_philo(t_shared *shared, t_philo **philo)
+int32_t initialization(t_shared *shared, t_philo **philo)
 {
 	int32_t	index;
 	int32_t	max_philos;
@@ -57,7 +59,7 @@ int32_t init_philo(t_shared *shared, t_philo **philo)
 	*philo = malloc(sizeof(t_philo) * (shared->args->nbr_philo));
 	if (!philo)
 		return (ERROR_ALLOCATION);
-	init_mutexes(shared);
+	init_shared(shared);
 	while (index < max_philos)
 	{
 		if (init_philos(shared, &philo[0][index], index) != SUCCESS)

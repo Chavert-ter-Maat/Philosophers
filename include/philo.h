@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:19:57 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/09/29 13:20:35 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int32_t			error_message(int32_t status);
 int32_t			argument_parsing(t_args *args, char **argv);
 
 // allocate_structs
-int32_t 		init_philo(t_shared *main, t_philo **philo);
+int32_t 		initialization(t_shared *main, t_philo **philo);
 
 // run_philo
 int32_t			run_philo(t_shared *main);
