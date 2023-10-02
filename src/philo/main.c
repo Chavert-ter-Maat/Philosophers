@@ -6,40 +6,36 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/29 14:16:15 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/02 16:40:01 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-void	check_state_philo(t_philo *philo)
+static int	check_state_philo(t_philo *philo)
 {
 	int	index;
-	int	time_difference;
-	int current_time = get_time();
+	uint64_t	time_difference;
 
 	index = 0;
 	while (1)
 	{
-		// pthread_mutex_lock(&philo->shared->eating);
-		time_difference = current_time - philo[index].time_last_eat;
-		printf("%i = time_last_eat\n", philo[index].time_last_eat);
-		printf("%i = current_time\n", current_time);
-		printf("%i = time_diff\n", time_difference);
-		// pthread_mutex_unlock(&philo->shared->eating);
+		pthread_mutex_lock(&philo->shared->eating);
+		time_difference = get_time() - philo[index].time_last_eat;
+		pthread_mutex_unlock(&philo->shared->eating);
 		if (time_difference > philo->args->time_die)
 		{
 			print_action(philo, DIED);
-			exit(EXIT_SUCCESS);
-		}
+			return (SUCCESS);
+			}
 		if (philo->shared->nbr_full_philo == philo->args->nbr_philo)
 		{
 			print_action(philo, FULL);
-			exit(EXIT_FAILURE);
+			return (SUCCESS);
 		}
-		if (index == philo->args->nbr_philo)
-			index = 0;
 		index++;
+		if (index == philo->args->nbr_philo - 1)
+			index = 0;
 	}
 }
 
@@ -47,7 +43,12 @@ int	run_philo(t_shared *shared)
 {
 	if (create_threads(shared) != SUCCESS)
 		return (ERROR_THREAD);
-	check_state_philo(shared->philo);
+	if (check_state_philo(shared->philo) == SUCCESS);
+		{
+			// free
+			// philo_thread_join(shared->philo);
+			// return ()
+		}
 	if (philo_thread_join(shared->philo) != SUCCESS)
 		return (ERROR_THREAD);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 13:21:44 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/29 13:55:27 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/02 15:25:07 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	check_meals_eaten(t_philo *philo)
 
 void	go_eat(t_philo *philo)
 {
+	
 	pthread_mutex_lock(&philo->shared->chops[philo->right]);
 	pthread_mutex_lock(&philo->shared->chops[philo->left]);
 	print_action(philo, CHOP);
@@ -34,7 +35,7 @@ void	go_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->shared->chops[philo->left]);
 	pthread_mutex_unlock(&philo->shared->chops[philo->right]);
 	pthread_mutex_lock(&philo->shared->eating);
-	philo->time_last_eat = get_time(); // moet dit in mutex?
+	philo->time_last_eat = get_time();
 	pthread_mutex_unlock(&philo->shared->eating);
 	if (philo->status != FULL)
 		philo->status = SLEEPING;
@@ -63,9 +64,10 @@ void	*action_sequence(void *arg)
 	philo = (t_philo*) arg;
 	pthread_mutex_lock(&philo->shared->start);
 	philo->shared->start_time = get_time();
+	printf("%li = get_time()\n", philo->shared->start_time);
 	pthread_mutex_unlock(&philo->shared->start);
 	pthread_mutex_lock(&philo->shared->eating);
-	philo->time_last_eat = philo->shared->start_time;
+	philo->time_last_eat = get_time();
 	pthread_mutex_unlock(&philo->shared->eating);
 	if ((philo->id % 2) == 1)
 	{

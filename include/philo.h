@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/29 13:20:35 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/02 17:10:11 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 # include <semaphore.h>
 # include <limits.h>
 # include <sys/time.h>
+# include <stdint.h>
 
 // defines
 # define	UNEVEN	% 2
 # define	LEFT	1
 # define	RIGHT	0
-# define 	FORMAT	"%d %d %s\n"
+# define 	FORMAT	"%li %d %s\n"
 
 // enum
 typedef enum e_error
@@ -53,9 +54,9 @@ typedef enum e_state
 typedef struct s_args
 {
 	int32_t				nbr_philo;
-	int32_t				time_die;
-	int32_t				time_eat;
-	int32_t				time_sleep;
+	uint64_t				time_die;
+	uint64_t				time_eat;
+	uint64_t				time_sleep;
 	int32_t				max_meals;
 }	t_args;
 
@@ -63,8 +64,8 @@ typedef struct s_philo
 {
 	int32_t				id;
 	pthread_t			*thread_id;
-	int32_t				time_last_eat;
-	int32_t				start_time;
+	uint64_t			time_last_eat;
+	uint64_t			start_time;
 	int32_t				meals_eaten;
 	int32_t				status;
 	int32_t				right;
@@ -80,19 +81,19 @@ typedef struct s_shared
 	pthread_mutex_t		*chops;
 	pthread_mutex_t		start;
 	int32_t				nbr_full_philo;
-	int32_t				start_time;
+	uint64_t			start_time;
 	t_args				*args;
 	t_philo				*philo;
 }	t_shared;
 
 // philo_actions
-void	go_eat(t_philo *philo);
-void	go_sleep(t_philo *philo);
-void	go_think(t_philo *philo);
-void	print_action(t_philo *philo, int32_t state);
+void			go_eat(t_philo *philo);
+void			go_sleep(t_philo *philo);
+void			go_think(t_philo *philo);
+void			print_action(t_philo *philo, int32_t state);
 
-int32_t create_threads(t_shared *main);
-void	*action_sequence(void *arg);
+int32_t			 create_threads(t_shared *main);
+void			*action_sequence(void *arg);
 
 // error_handling
 int32_t			error_handling(int argc, char **argv);
@@ -114,10 +115,10 @@ void			ph_putstr_fd(const int fd, const char *message);
 void			ph_bzero(void *s, size_t amount);
 
 // utils_time
-int32_t			get_time(void);
-void			sleep_function(int32_t sleep_ms);
+uint64_t		get_time(void);
+void			sleep_function(uint64_t sleep_ms);
 
 // utils_free
-int32_t			philo_thread_join(t_philo *philo);
+int32_t			free_philos(t_philo *philo);
 
 #endif

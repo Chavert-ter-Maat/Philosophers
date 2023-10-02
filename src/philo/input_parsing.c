@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/29 13:14:36 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/02 15:04:26 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int32_t single_philo(t_args *args)
 void	print_args(t_args *args)
 {
 	printf("%i = nbr_philo\n", args->nbr_philo);
-	printf("%i = time_die\n", args->time_die);
-	printf("%i = time_eat\n", args->time_eat);
-	printf("%i = time_sleep\n", args->time_sleep);
+	printf("%li = time_die\n", args->time_die);
+	printf("%li = time_eat\n", args->time_eat);
+	printf("%li = time_sleep\n", args->time_sleep);
 	printf("%i = max_meals\n", args->max_meals);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 11:32:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/09/29 12:54:59 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/02 15:14:04 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static const char	*message[] = {
 
 void	print_action(t_philo *philo, int32_t state)
 {
-	const int32_t	current_time = get_time();
+	uint64_t	current_time = get_time();
 	
 	if (philo->status == DIED)
 		{
