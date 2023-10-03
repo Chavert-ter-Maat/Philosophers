@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 11:32:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/10/02 15:14:04 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/03 14:32:03 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,12 @@ static const char	*message[] = {
 [FULL] = "philos are full",
 };
 
-void	print_action(t_philo *philo, int32_t state)
+uint32_t	print_action(t_philo *philo, int32_t state)
 {
 	uint64_t	current_time = get_time();
 	
-	if (philo->status == DIED)
-		{
-			printf("philo has died 2\n");
-			// join & free
-			exit(EXIT_SUCCESS);
-		}
 	pthread_mutex_lock(&philo->shared->print_msg);
 	printf(FORMAT, current_time - philo->shared->start_time, philo->id, message[state]);
 	pthread_mutex_unlock(&philo->shared->print_msg);
+	return (SUCCESS);
 }

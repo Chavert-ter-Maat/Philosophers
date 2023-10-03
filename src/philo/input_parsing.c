@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/02 15:04:26 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/03 11:51:35 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int32_t	argument_parsing(t_args *args, char **argv)
 			return (ERROR_INPUT);
 	if (args->nbr_philo == 1)
 		return (single_philo(args));
-	print_args(args);
 	return (SUCCESS);
 }

@@ -6,13 +6,13 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 11:02:14 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/02 17:16:33 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/03 11:09:24 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-int32_t free_philos(t_philo *philo)
+int32_t thread_join(t_philo *philo)
 {
 	int	index;
 
@@ -21,32 +21,34 @@ int32_t free_philos(t_philo *philo)
 	{
 		if (pthread_join(*philo[index].thread_id, NULL) != SUCCESS)
 			return (ERROR_THREAD);
-		free(philo[index].thread_id);
 		index++;
 	}
 	return (SUCCESS);
 }
 
+void	free_philos(t_philo *philo)
+{
+	int	index;
+
+	index = philo->args->nbr_philo;
+
+	while(index != 0)
+	{
+		free(&philo[index].thread_id);
+		free(&philo[index]);
+		index--;
+	}
+	
+}
+
 void	destroy_mutexes(t_shared *shared)
 {
 	if (&shared->print_msg)
-		if (pthread_mutex_destroy(&shared->print_msg) != SUCCESS)
-		{
-			perror("mutex desruction failed");
-			return ;
-		}	
+		pthread_mutex_destroy(&shared->print_msg);
 	if (&shared->eating)
-		if (pthread_mutex_destroy(&shared->eating) != SUCCESS)
-		{
-			perror("mutex desruction failed");
-			return ;
-		}
+		pthread_mutex_destroy(&shared->eating);
 	if (&shared->eating)
-		if (pthread_mutex_destroy(&shared->eating) != SUCCESS)
-		{
-			perror("mutex desruction failed");
-			return ;
-		}	
+		pthread_mutex_destroy(&shared->eating);
 }
 
 void	destroy_chops(t_shared *shared)
@@ -54,15 +56,16 @@ void	destroy_chops(t_shared *shared)
 	int	index;
 
 	index = 0;
-	while (index <= shared->args->nbr_philo)
+	while (index < shared->args->nbr_philo)
 	{
-		phtread_mutex_destroy(&shared->chops[index]);
+		pthread_mutex_destroy(&shared->chops[index]);
 		index++;
 	}
 }
 
-int	ph_free(t_shared *shared)
+void	free_and_destroy(t_shared *shared)
 {
 	destroy_mutexes(shared);
 	destroy_chops(shared);
+	free_philos(shared->philo);
 }
