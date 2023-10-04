@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/03 14:42:50 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/04 15:49:34 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,23 @@ static int	run_philo(t_shared *shared)
 int	main(int argc, char **argv)
 {
 	t_shared	shared;
-	t_args	args;
-	t_philo	philo[200];
-	int		status;
-	
+	t_args		args;
+	t_philo		philo[200];
+	int			status;
+
 	status = error_handling(argc, argv);
 	if (status != SUCCESS)
 		return (error_message(status));
 	status = argument_parsing(&args, argv);
 	if (status != SUCCESS)
-		return (error_message(status)); 
+		return (error_message(status));
 	shared.args = &args;
 	status = initialization(&shared, philo);
-	if (status != SUCCESS) 
-		return (status);
+	if (status != SUCCESS)
+		return (error_message(status));
 	shared.philo = philo;
 	status = run_philo(&shared);
-	if (status != SUCCESS) 
-		return (status);
-	
-	// //free allocations, philos, chops, join_threads??
-	return(status);
+	if (status != SUCCESS)
+		return (destroy_mutex(&shared, status));
+	return (status);
 }

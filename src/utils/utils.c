@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 12:44:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/18 12:04:45 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/04 16:26:17 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,16 @@
 
 long long int	ph_atoi(const char *str)
 {
-	int	index;
+	int				index;
 	long long int	result;
 
 	index = 0;
 	result = 0;
 	while ((str[index] >= '0' && str[index] <= '9') && str[index])
-	{	
+	{
 		result = result * 10;
 		result = (result + (str[index] - '0'));
 		index++;
-	}
-	if (str[index] != '\0' || result < INT_MIN || result > INT_MAX)
-	{
-		error_message(ERROR_INPUT);
-		exit(ERROR_INPUT);
 	}
 	return (result);
 }
@@ -38,22 +33,23 @@ int32_t	ph_strcmp(const char *str1, const char *str2)
 	size_t	index;
 
 	index = 0;
-
-	while (str1[index] != '\0' && str2[index] != '\0' && str1[index] == str2[index])
-        index++;
+	while (str1[index] != '\0' && str2[index] != '\0' && str1[index] \
+		== str2[index])
+		index++;
 	if (str1[index] == '\0' && str2[index] == '\0')
 		return (0);
 	else
 		return (1);
 }
 
-static int32_t ph_strlen(const char *str)
+static int32_t	ph_strlen(const char *str)
 {
 	int	len;
+
 	if (!str)
 		return (0);
 	len = 0;
-	while(str[len])
+	while (str[len])
 		len++;
 	return (len);
 }
@@ -67,7 +63,6 @@ void	ph_putstr_fd(const int fd, const char *message)
 	}
 	write (fd, message, ph_strlen(message));
 }
-
 
 void	ph_bzero(void *s, size_t amount)
 {

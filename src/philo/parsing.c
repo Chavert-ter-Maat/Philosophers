@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   input_parsing.c                                    :+:    :+:            */
+/*   parsing.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/03 11:51:35 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/04 16:37:12 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
-
-int32_t single_philo(t_args *args)
-{
-    (void)* args;
-    
-    printf("philo has died\n"); //adjust
-    exit(EXIT_FAILURE); // check exit!!
-}
-
-void	print_args(t_args *args)
-{
-	printf("%i = nbr_philo\n", args->nbr_philo);
-	printf("%li = time_die\n", args->time_die);
-	printf("%li = time_eat\n", args->time_eat);
-	printf("%li = time_sleep\n", args->time_sleep);
-	printf("%i = max_meals\n", args->max_meals);
-}
 
 int32_t	argument_parsing(t_args *args, char **argv)
 {
@@ -39,11 +22,14 @@ int32_t	argument_parsing(t_args *args, char **argv)
 	if (argv[5])
 		args->max_meals = ph_atoi(argv[5]);
 	else
-		args->max_meals = -1;
-	if (args->nbr_philo < 1 || args->nbr_philo > 200 || args->time_die < 1 \
-	 	|| args->time_eat < 1 || args->time_sleep < 1)
-			return (ERROR_INPUT);
+		args->max_meals = -1;	
 	if (args->nbr_philo == 1)
-		return (single_philo(args));
+		return (SINGLE_PHILO);
+	if (args->nbr_philo > INT_MAX || args->time_die > INT_MAX || \
+		args->time_eat > INT_MAX || args->time_sleep > INT_MAX)
+		return (ERROR_INPUT);
+	if (args->nbr_philo < 1 || args->nbr_philo > 200 || args->time_die < 1 \
+		|| args->time_eat < 1 || args->time_sleep < 1)
+		return (ERROR_INPUT);
 	return (SUCCESS);
 }

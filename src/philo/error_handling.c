@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:52 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/09/26 10:00:25 by chavertterm   ########   odam.nl         */
+/*   Updated: 2023/10/04 16:20:25 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,20 @@ int32_t	error_message(int32_t status)
 	[ERROR_THREAD] = "thread create failed"
 	};
 
+	if (status == SINGLE_PHILO)
+	{
+		ph_putstr_fd(STDOUT_FILENO, "0 1 has died\n");
+		return (SUCCESS);
+	}
 	ph_putstr_fd(STDERR_FILENO, "philo: ");
 	ph_putstr_fd(STDERR_FILENO, error_message[status]);
 	ph_putstr_fd(STDERR_FILENO, "\n");
 	ph_putstr_fd(STDERR_FILENO, "philo: './philo help' for more info\n");
 	ph_putstr_fd(STDERR_FILENO, "exit\n");
-	exit (status);
+	return (status);
 }
 
-static void	help_message(void)
+static int32_t	help_message(void)
 {
 	ph_putstr_fd(STDOUT_FILENO, "philo: enter 4 or 5 arguments\n");
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 1 = nbr philos > 1 & <= 200\n");
@@ -38,8 +43,7 @@ static void	help_message(void)
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 4 = time to sleep\n");
 	ph_putstr_fd(STDOUT_FILENO, "philo: arg 5 = max times eat (optional)\n");
 	ph_putstr_fd(STDERR_FILENO, "exit\n");
-	exit (SUCCESS);
-
+	return (SUCCESS);
 }
 
 int32_t	error_handling(int argc, char **argv)
