@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 13:13:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/10/06 13:42:48 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/06 14:13:58 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int32_t	create_threads(t_shared *shared)
 		status = pthread_create(&(shared->philo[index].thread_id), NULL, \
 		action_sequence, &shared->philo[index]);
 		if (status != SUCCESS)
-			return (ERROR_THREAD);
+			return (ERROR_THREAD); // join for the amount of threads created
 		index++;
 	}
 	shared->start_time = get_time();

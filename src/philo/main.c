@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/06 13:41:25 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/06 14:15:41 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,5 @@ int	main(int argc, char **argv)
 		return (error_message(status));
 	shared.philo = philo;
 	status = run_philo(&shared);
-	
-	if (status != SUCCESS)
-		return (destroy_mutex(&shared, status));
-	return (destroy_mutex(&shared, status));
-	return(0);
+	return(status);
 }

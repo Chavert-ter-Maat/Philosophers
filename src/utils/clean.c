@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 11:02:14 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/06 13:50:17 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/06 14:14:46 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,3 @@ int32_t	thread_join(t_philo *philo)
 	return (SUCCESS);
 }
 
-int32_t	destroy_chops(t_shared *shared)
-{
-	int32_t index;
-
-	index = 0;
-	while (index < shared->args->nbr_philo)
-	{
-		if (pthread_mutex_destroy(&shared->chops[index]) != SUCCESS)
-		{
-			ph_putstr_fd(STDERR_FILENO, "'chop' mutex destruction failed");
-			return (ERROR_MUTEX);
-		}
-		index++;
-	}
-	return (SUCCESS);
-}
-
-int32_t	destroy_mutex(t_shared *shared, int32_t status)
-{
-
-	if (destroy_chops(shared) != SUCCESS)
-		return (ERROR_MUTEX);
-	if (pthread_mutex_destroy(&shared->observer) != SUCCESS)
-	{
-		ph_putstr_fd(STDERR_FILENO, "'time' mutex destruction failed");
-		return (ERROR_MUTEX);
-	}
-	if (pthread_mutex_destroy(&shared->start) != SUCCESS)
-	{
-		ph_putstr_fd(STDERR_FILENO, "'start' mutex destruction failed");
-		return (ERROR_MUTEX);
-	}
-	if (pthread_mutex_destroy(&shared->print) != SUCCESS)
-	{
-		ph_putstr_fd(STDERR_FILENO, "'print' mutex destruction failed");
-		return (ERROR_MUTEX);
-	}
-	return (status);
-}

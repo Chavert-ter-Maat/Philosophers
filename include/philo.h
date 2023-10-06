@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/06 13:51:04 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/06 14:16:09 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_shared
 	pthread_mutex_t		observer;
 	pthread_mutex_t		start;
 	pthread_mutex_t		print;
-	pthread_mutex_t		*chops;
+	pthread_mutex_t		chops[200];
 	int32_t				nbr_full_philo;
 	int32_t				status;
 	uint64_t			start_time;
