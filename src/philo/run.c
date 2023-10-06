@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 13:13:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/10/04 16:04:48 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/06 13:42:48 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ static void	function_because_norminette(t_philo *philo)
 		if (go_think(philo) == SIM_STOP)
 			return ;
 	}
-	return;
+	return ;
 }
+
 static void	*action_sequence(void *arg)
 {
 	uint64_t	start_time;
@@ -33,10 +34,10 @@ static void	*action_sequence(void *arg)
 	philo = (t_philo *) arg;
 	pthread_mutex_lock(&philo->shared->start);
 	start_time = philo->shared->start_time;
-	pthread_mutex_lock(&philo->shared->time);
-	philo->time_last_eat = start_time;
-	pthread_mutex_unlock(&philo->shared->time);
 	pthread_mutex_unlock(&philo->shared->start);
+	pthread_mutex_lock(&philo->shared->observer);
+	philo->time_last_eat = start_time;
+	pthread_mutex_unlock(&philo->shared->observer);
 	if ((philo->id % 2) == 1)
 	{
 		if (go_think(philo) == SIM_STOP)
@@ -49,24 +50,18 @@ static void	*action_sequence(void *arg)
 
 int32_t	create_threads(t_shared *shared)
 {
-	int	i;
-	int	max_philos;
+	int	index;
 	int	status;
 
-	i = 0;
-	max_philos = shared->args->nbr_philo;
+	index = 0;
 	pthread_mutex_lock(&shared->start);
-	while (i < max_philos)
+	while (index < shared->args->nbr_philo)
 	{
-		status = pthread_create(&(shared->philo[i].thread_id), NULL, \
-		action_sequence, &shared->philo[i]);
+		status = pthread_create(&(shared->philo[index].thread_id), NULL, \
+		action_sequence, &shared->philo[index]);
 		if (status != SUCCESS)
-		{
-			printf("error creating threads");
-			exit(1);
 			return (ERROR_THREAD);
-		}
-		i++;
+		index++;
 	}
 	shared->start_time = get_time();
 	pthread_mutex_unlock(&shared->start);

@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 13:21:44 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/04 16:05:29 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/06 13:31:56 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	check_meals_eaten(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->shared->status_mutex);
+	pthread_mutex_lock(&philo->shared->observer);
 	if (philo->meals_eaten == philo->args->max_meals && philo->status != FULL)
 	{
 		philo->shared->nbr_full_philo += 1;
 		philo->status = FULL;
 	}
-	pthread_mutex_unlock(&philo->shared->status_mutex);
+	pthread_mutex_unlock(&philo->shared->observer);
 }
 
 uint32_t	go_eat(t_philo *philo)
@@ -38,9 +38,9 @@ uint32_t	go_eat(t_philo *philo)
 	print_action(philo, CHOP);
 	print_action(philo, CHOP);
 	print_action(philo, EATING);
-	pthread_mutex_lock(&philo->shared->time);
+	pthread_mutex_lock(&philo->shared->observer);
 	philo->time_last_eat = get_time();
-	pthread_mutex_unlock(&philo->shared->time);
+	pthread_mutex_unlock(&philo->shared->observer);
 	sleep_function(philo->args->time_eat);
 	philo->meals_eaten += 1;
 	pthread_mutex_unlock(&philo->shared->chops[philo->left]);
@@ -71,4 +71,3 @@ uint32_t	go_think(t_philo *philo)
 		philo->status = EATING;
 	return (SUCCESS);
 }
-
