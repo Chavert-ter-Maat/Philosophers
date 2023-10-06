@@ -6,7 +6,7 @@
 #    By: cter-maa <cter-maa@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/20 11:46:11 by cter-maa      #+#    #+#                  #
-#    Updated: 2023/10/04 16:01:53 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/10/06 13:46:18 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ ifdef DEBUG
 endif
 
 ifdef FSAN
-	CFLAGS	+=-fsanitize=address,undefined
-	# CFLAGS	+=-fsanitize=thread
+	# CFLAGS	+=-fsanitize=address,undefined
+	CFLAGS	+=-fsanitize=thread
 endif
 
 RM			= rm -rf

@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/04 16:35:21 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/06 13:51:04 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef enum e_state
 
 typedef struct s_args
 {
-	uint32_t			nbr_philo;
+	int32_t				nbr_philo;
 	uint64_t			time_die;
 	uint64_t			time_eat;
 	uint64_t			time_sleep;
@@ -77,11 +77,10 @@ typedef struct s_philo
 
 typedef struct s_shared
 {
-	pthread_mutex_t		time;
-	pthread_mutex_t		eating;
+	pthread_mutex_t		observer;
 	pthread_mutex_t		start;
-	pthread_mutex_t		status_mutex;
-	pthread_mutex_t		chops[200];
+	pthread_mutex_t		print;
+	pthread_mutex_t		*chops;
 	int32_t				nbr_full_philo;
 	int32_t				status;
 	uint64_t			start_time;
@@ -100,7 +99,7 @@ uint32_t		check_state_philo(t_philo *philo);
 int32_t			error_handling(int argc, char **argv);
 int32_t			error_message(int32_t status);
 int32_t			argument_parsing(t_args *args, char **argv);
-int32_t			initialization(t_shared *main, t_philo *philo);
+int32_t			initialization(t_shared *shared, t_philo *philo);
 
 // utils
 int32_t			ph_strcmp(const char *str1, const char *str2);
