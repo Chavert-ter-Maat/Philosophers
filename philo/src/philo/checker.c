@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 13:58:59 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/10 14:03:20 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/11 10:29:37 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,18 @@ static int32_t	check_full(t_philo *philo)
 	return (0);
 }
 
+void	print_died(t_philo *philo, int32_t index)
+{
+	usleep(4000);
+	pthread_mutex_lock(&philo->shared->print);
+	printf(FORMAT, get_time() - philo->shared->start_time, \
+		philo[index].id, "has died");
+	pthread_mutex_unlock(&philo->shared->print);
+}
+
 uint32_t	check_runner(t_philo *philo)
 {
-	int			index;
+	int32_t		index;
 	uint64_t	time_difference;
 
 	index = 0;
@@ -43,7 +52,7 @@ uint32_t	check_runner(t_philo *philo)
 			pthread_mutex_lock(&philo->shared->observer);
 			philo->shared->status = DIED;
 			pthread_mutex_unlock(&philo->shared->observer);
-			print_action(&philo[index], DIED);
+			print_died(philo, index);
 			return (SIM_STOP);
 		}
 		if (check_full(philo) == FULL)

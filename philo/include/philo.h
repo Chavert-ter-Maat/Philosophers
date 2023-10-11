@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/09 11:47:17 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/11 09:06:59 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef enum e_state
 	FULL,
 	ERROR,
 	SIM_STOP,
+	PRINTED,
 	SINGLE_PHILO
 }	t_state;
 
