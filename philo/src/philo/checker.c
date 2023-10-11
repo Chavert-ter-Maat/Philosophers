@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 13:58:59 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/11 10:29:37 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/11 18:53:48 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static int32_t	check_full(t_philo *philo)
 	pthread_mutex_unlock(&philo->shared->observer);
 	if (nbr_full_philo == philo->general->nbr_philo)
 	{
+		pthread_mutex_lock(&philo->shared->observer);
 		philo->shared->status = FULL;
+		pthread_mutex_unlock(&philo->shared->observer);
 		return (FULL);
 	}
 	return (0);
