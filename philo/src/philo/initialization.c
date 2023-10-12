@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 14:39:05 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/09 12:11:14 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/12 10:42:44 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int32_t	init_chops(t_shared *shared)
 		if (pthread_mutex_init(&shared->chops[shared->general->inited_chops], \
 			NULL) != SUCCESS)
 		{
+			ph_putstr_fd(STDERR_FILENO, "'chops' mutex init failed");
 			destroy_mutex(shared, ERROR_ALLOCATION);
 			return (ERROR_ALLOCATION);
 		}
@@ -45,11 +46,13 @@ static int32_t	init_mutexes(t_shared *shared)
 		return (ERROR_ALLOCATION);
 	if (pthread_mutex_init(&(shared->start), NULL) != SUCCESS)
 	{
+		ph_putstr_fd(STDERR_FILENO, "'start' mutex init failed");
 		pthread_mutex_destroy(&(shared->observer));
 		return (ERROR_ALLOCATION);
 	}
 	if (pthread_mutex_init(&(shared->print), NULL) != SUCCESS)
 	{
+		ph_putstr_fd(STDERR_FILENO, "'print' mutex init failed");
 		pthread_mutex_destroy(&(shared->observer));
 		pthread_mutex_destroy(&(shared->start));
 		return (ERROR_ALLOCATION);

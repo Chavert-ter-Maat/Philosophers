@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/06 11:03:57 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/11 13:31:08 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/12 10:37:54 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int32_t	argument_parsing(t_general *general, char **argv)
 		if (general->max_meals < 1)
 			return (ERROR_INPUT);
 	}
-	if (general->nbr_philo == 1)
-		return (SINGLE_PHILO);
 	if (general->nbr_philo > INT_MAX || general->time_die > INT_MAX || \
 		general->time_eat > INT_MAX || general->time_sleep > INT_MAX)
 		return (ERROR_INPUT);
@@ -37,5 +35,7 @@ int32_t	argument_parsing(t_general *general, char **argv)
 		general->time_die < 1 || general->time_eat < 1 || \
 		general->time_sleep < 1)
 		return (ERROR_INPUT);
+	if (general->nbr_philo == 1)
+		return (SINGLE_PHILO);
 	return (SUCCESS);
 }
