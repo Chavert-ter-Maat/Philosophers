@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/18 14:39:05 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/12 10:42:44 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/13 12:08:12 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	init_philos(t_shared *shared, t_philo *philo, int32_t nbr)
 {
+	ph_bzero(philo, sizeof(philo));
 	shared->philo = philo;
 	philo->shared = shared;
+	philo->meals_eaten = 0;
 	philo->general = shared->general;
 	philo->id = nbr + 1;
 	philo->right = nbr;
@@ -42,6 +44,7 @@ static int32_t	init_chops(t_shared *shared)
 
 static int32_t	init_mutexes(t_shared *shared)
 {
+	ph_bzero(shared, sizeof(shared));
 	if (pthread_mutex_init(&(shared->observer), NULL) != SUCCESS)
 		return (ERROR_ALLOCATION);
 	if (pthread_mutex_init(&(shared->start), NULL) != SUCCESS)

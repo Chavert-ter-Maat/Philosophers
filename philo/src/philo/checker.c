@@ -6,13 +6,13 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 13:58:59 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/11 18:53:48 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/13 12:18:08 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-static int32_t	check_full(t_philo *philo)
+static int32_t	check_all_full(t_philo *philo)
 {
 	int	nbr_full_philo;
 
@@ -29,7 +29,7 @@ static int32_t	check_full(t_philo *philo)
 	return (0);
 }
 
-void	print_died(t_philo *philo, int32_t index)
+static void	print_died(t_philo *philo, int32_t index)
 {
 	usleep(4000);
 	pthread_mutex_lock(&philo->shared->print);
@@ -57,12 +57,24 @@ uint32_t	check_runner(t_philo *philo)
 			print_died(philo, index);
 			return (SIM_STOP);
 		}
-		if (check_full(philo) == FULL)
+		if (check_all_full(philo) == FULL)
 			return (SIM_STOP);
 		index++;
 		if (index == philo->general->nbr_philo - 1)
 			index = 0;
 	}
+}
+
+void	check_full(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->shared->observer);
+	if (philo->meals_eaten == philo->general->max_meals \
+		&& philo->status != FULL)
+	{
+		philo->shared->nbr_full_philo += 1;
+		philo->status = FULL;
+	}
+	pthread_mutex_unlock(&philo->shared->observer);
 }
 
 uint32_t	check_state(t_philo *philo)

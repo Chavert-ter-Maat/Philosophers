@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 11:32:51 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/10/11 10:30:47 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/12 11:30:57 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ uint32_t	print_action(t_philo *philo, int32_t state)
 	[EATING] = "is eating",
 	[SLEEPING] = "is sleeping",
 	[THINKING] = "is thinking",
-	[DIED] = "has died",
 	[FULL] = "philos are full"
 	};
 

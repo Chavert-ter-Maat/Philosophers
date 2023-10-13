@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:40:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/11 09:06:59 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/13 12:10:42 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ int32_t			error_handling(int argc, char **argv);
 int32_t			error_message(int32_t status, char *time_to_die);
 int32_t			argument_parsing(t_general *general, char **argv);
 int32_t			initialization(t_shared *shared, t_philo *philo);
+void			check_full(t_philo *philo);
 
 // utils
 long long int	ph_atoi(const char *str);
 void			ph_putstr_fd(const int fd, const char *message);
 void			ph_bzero(void *s, size_t amount);
-void			sleep_function(uint64_t sleep_ms);
+int32_t			sleep_function(t_philo *philo, uint64_t sleep_ms);
 uint64_t		get_time(void);
 int32_t			destroy_chops(t_shared *shared);
 int32_t			ph_strcmp(const char *str1, const char *str2);

@@ -6,21 +6,11 @@
 /*   By: cter-maa <cter-maa@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 14:36:21 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/10/09 11:51:55 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/10/13 11:58:44 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
-
-static int	run_philo(t_shared *shared)
-{
-	if (create_threads(shared) != SUCCESS)
-		return (ERROR_THREAD);
-	check_runner(shared->philo);
-	if (thread_join(shared->philo) != SUCCESS)
-		return (ERROR_THREAD);
-	return (SUCCESS);
-}
 
 int	main(int argc, char **argv)
 {
@@ -40,7 +30,11 @@ int	main(int argc, char **argv)
 	if (status != SUCCESS)
 		return (error_message(status, argv[2]));
 	shared.philo = philo;
-	status = run_philo(&shared);
+	status = create_threads(&shared);
+	if (status != SUCCESS)
+		return (destroy_mutex(&shared, status));
+	check_runner(philo);
+	status = thread_join(philo);
 	destroy_mutex(&shared, status);
 	return (status);
 }
